@@ -1,20 +1,20 @@
 package representation
 
 type Alarm struct {
-	AlarmType string `json:"type"`
-	Message   string `json:"message"`
-	User      string `json:"user"`
+	Level                string `json:"level"`
+	EmployeeAbbreviation string `json:"employeeAbbreviation"`
+	Message              string `json:"message"`
 }
 
 func (u *Alarm) OK() error {
-	if len(u.AlarmType) == 0 {
-		return MissingFieldError("type")
+	if len(u.Level) == 0 {
+		return MissingFieldError("level")
+	}
+	if len(u.EmployeeAbbreviation) == 0 {
+		return MissingFieldError("employeeAbbreviation")
 	}
 	if len(u.Message) == 0 {
 		return MissingFieldError("message")
-	}
-	if len(u.User) == 0 {
-		return MissingFieldError("user")
 	}
 	return nil
 }

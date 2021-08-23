@@ -10,7 +10,7 @@ import (
 
 func HandleRequest() {
 	alarmRouter := mux.NewRouter().StrictSlash(true)
-	alarmRouter.HandleFunc("/notification", processAlarm).Methods("POST")
+	alarmRouter.HandleFunc("/notify", processAlarm).Methods("POST")
 	log.Fatal(http.ListenAndServe(":8080", alarmRouter))
 }
 
