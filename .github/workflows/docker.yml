@@ -1,0 +1,29 @@
+name: Container
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  images:
+    name: build images
+    runs-on: ubuntu-latest
+    steps:
+      - name: Find reference branch
+        run: test "$GITHUB_BASE_REF" && echo "BRANCH=${GITHUB_BASE_REF##*/}" >> $GITHUB_ENV || echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
+      - name: Set VERSION based on ${{ env.BRANCH }}
+        run: test "$BRANCH" = "main" && echo "VERSION=latest" >> $GITHUB_ENV || echo "VERSION=$BRANCH" >> $GITHUB_ENV
+      - uses: docker/setup-buildx-action@v1
+      - uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+      - name: upload-docker-image:${{ env.VERSION }}
+        uses: docker/build-push-action@v2.5.0
+        with:
+          context: .
+          push: true
+          tags: ${{ github.repository }}:${{ env.VERSION }}
+          file: Dockerfile
