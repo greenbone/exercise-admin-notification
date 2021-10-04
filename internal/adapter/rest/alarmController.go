@@ -33,7 +33,7 @@ func processAlarm(writer http.ResponseWriter, request *http.Request) {
 		adapter.SendResponse(writer, http.StatusUnprocessableEntity, err.Error())
 		return
 	}
-	log.Printf("Notification successful received: %+v\n", alarm)
+	log.Printf("Notification successfully received: %+v\n", alarm)
 	adapter.SendResponse(writer, http.StatusOK, alarm)
 }
 
