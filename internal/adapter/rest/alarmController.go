@@ -4,9 +4,10 @@ import (
 	"admin-alarm/internal/adapter"
 	"admin-alarm/internal/adapter/representation"
 	"encoding/json"
-	"github.com/gorilla/mux"
 	"log"
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 func HandleRequest() {
