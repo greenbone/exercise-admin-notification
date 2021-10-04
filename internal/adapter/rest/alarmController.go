@@ -20,6 +20,14 @@ func HandleRequest() {
 }
 
 func processAlarm(writer http.ResponseWriter, request *http.Request) {
+	headerContentType := request.Header.Get("Content-Type")
+	if headerContentType != "application/json" {
+		errorMessage := representation.Error{}
+		errorMessage.Message = "Content Type must be application/json"
+		adapter.SendResponse(writer, http.StatusBadRequest, errorMessage)
+		return
+	}
+
 	alarm := representation.Alarm{}
 	err := parseData(request, &alarm)
 	if err != nil {
