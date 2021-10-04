@@ -12,8 +12,10 @@ import (
 
 func HandleRequest() {
 	log.Print("Starting Admin Notification service on http://localhost:8080/api/notify")
+
 	alarmRouter := mux.NewRouter().StrictSlash(true)
-	alarmRouter.HandleFunc("/notify", processAlarm).Methods("POST")
+	alarmRouter.HandleFunc("/api/notify", processAlarm).Methods("POST")
+
 	log.Fatal(http.ListenAndServe(":8080", alarmRouter))
 }
 
