@@ -23,3 +23,11 @@ curl --header "Content-Type: application/json" \
         "message": "some message"
     }' http://localhost:8080/api/notify
 ```
+
+To build the service run
+
+```sh
+go build -o admin-alarm
+```
+
+Afterwards the service can be started with `./admin-alarm`.
