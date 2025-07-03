@@ -1,7 +1,7 @@
 # Admin Notification Service - Dummy
 
 This repository provides a Admin Notification Dummy Service that runs on port
-8080 for the HTTP URL `/api/notification` to get a POST request with the
+8080 for the HTTP URL `/api/notify` to get a POST request with the
 following JSON data
 
 ```json
